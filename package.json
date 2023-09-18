@@ -1,0 +1,25 @@
+{
+  "name": "fib-wasm",
+  "version": "0.0.1",
+  "scripts": {
+    "build:debug": "asc src/index.ts --target debug",
+    "build:release": "asc src/index.ts --target release",
+    "build": "npm run build:debug && npm run build:release",
+    "test": "node tests/index.js",
+    "play": "pnpm -C playground dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "assemblyscript": "^0.27.9"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./build/release.js",
+      "types": "./build/release.d.ts"
+    }
+  },
+  "types": "./build/release.d.ts"
+}
