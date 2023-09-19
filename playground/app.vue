@@ -1,16 +1,11 @@
 <script setup lang="ts">
 import { fib } from 'fib-wasm'
 
-// 显示一个 fib 金字塔
-// 引入的 fib 函数接受一个数字，然后返回数列中这个位置的数字
-
-// fib 金字塔的层数
 const layer = ref(1)
 
-// fib 金字塔的结果
 const res = ref<number[]>([])
 
-onBeforeMount(() => {
+onMounted(() => {
   res.value = []
   res.value.push(fib(layer.value))
 })

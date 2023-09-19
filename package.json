@@ -2,6 +2,7 @@
   "name": "fib-wasm",
   "version": "0.0.1",
   "scripts": {
+    "dev": "nodemon",
     "build:debug": "asc src/index.ts --target debug",
     "build:release": "asc src/index.ts --target release",
     "build": "npm run build:debug && npm run build:release",
@@ -12,7 +13,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "assemblyscript": "^0.27.9"
+    "assemblyscript": "^0.27.9",
+    "nodemon": "^3.0.1"
   },
   "type": "module",
   "exports": {
