@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
+    "build": "nuxt build && ts-node --esm ./script/build.ts",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "nuxt": "^3.7.3"
+    "nuxt": "^3.7.3",
+    "ts-node": "^10.9.1"
   }
 }

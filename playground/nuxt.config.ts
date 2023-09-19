@@ -9,5 +9,10 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   alias: {
     'fib-wasm': resolve(__dirname, PROP ? '../build/release' : '../build/debug'),
-  }
+  },
+  vite: {
+    build: {
+      target: 'esnext', // for assemblyscript top-level await
+    }
+  },
 })
