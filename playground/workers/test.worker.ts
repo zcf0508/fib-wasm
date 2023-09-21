@@ -1,18 +1,17 @@
-export function sketchFilter(
+export function sketchFilter3(
   /** 当前需要渲染的帧 */
   data: Uint8Array, 
-  width: i32,
-  height: i32,
+  width: number,
+  height: number,
 ): Uint8Array {
   const length = data.length;
-  const e = 1e-4
   // step 1 反色
   let layer1 = new Uint8Array(length);
   for (let i = 0; i < length; i += 4) {
-    const r = i32(data[i]);
-    const g = i32(data[i + 1]);
-    const b = i32(data[i + 2]);
-    const a = i32(data[i + 3]);
+    const r = Number(data[i]);
+    const g = Number(data[i + 1]);
+    const b = Number(data[i + 2]);
+    const a = Number(data[i + 3]);
 
     layer1[i] = 255 - r;
     layer1[i + 1] = 255 - g;
@@ -64,17 +63,17 @@ export function sketchFilter(
 
   let layer3 = new Uint8Array(length);
   for (let i = 0; i < length; i += 4) {
-    const r = i32(layer1[i]);
-    const g = i32(layer1[i + 1]);
-    const b = i32(layer1[i + 2]);
-    const a = i32(layer1[i + 3]);
-    const r2 = i32(layer2[i]);
-    const g2 = i32(layer2[i + 1]);
-    const b2 = i32(layer2[i + 2]);
+    const r = Number(layer1[i]);
+    const g = Number(layer1[i + 1]);
+    const b = Number(layer1[i + 2]);
+    const a = Number(layer1[i + 3]);
+    const r2 = Number(layer2[i]);
+    const g2 = Number(layer2[i + 1]);
+    const b2 = Number(layer2[i + 2]);
 
-    layer3[i] = r + r2 * r / (255 - r2 + 1);
-    layer3[i + 1] = g + g2 * g / (255 - g2 + 1);
-    layer3[i + 2] = b + b2 * b / (255 - b2 + 1);
+    layer3[i] = r + r2 * r / (255 - r2);
+    layer3[i + 1] = g + g2 * g / (255 - g2);
+    layer3[i + 2] = b + b2 * b / (255 - b2);
     layer3[i + 3] = 0xff;
   }
 
