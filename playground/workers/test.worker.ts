@@ -1,3 +1,4 @@
+export { sketchFilter as sketchFilter4 } from 'fib-wasm'
 export function sketchFilter3(
   /** 当前需要渲染的帧 */
   data: Uint8Array, 

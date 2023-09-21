@@ -3,7 +3,7 @@
 import { sketchFilter } from 'fib-wasm'
 import { ref, onMounted, nextTick } from 'vue'
 
-const { sketchFilter3 } = new ComlinkWorker<typeof import('../workers/test.worker.ts')>(new URL('../workers/test.worker.ts', import.meta.url))
+const { sketchFilter3, sketchFilter4 } = new ComlinkWorker<typeof import('../workers/test.worker.ts')>(new URL('../workers/test.worker.ts', import.meta.url))
 
 const videoRef = ref<HTMLVideoElement>()
 const canvasRef = ref<HTMLCanvasElement>()
@@ -75,6 +75,18 @@ function start() {
         ctx.putImageData(temp, 0, 0)
       }
       sketchFilter3(data, canvas.width, canvas.height).then(res => {
+        const resImageData = new ImageData(new Uint8ClampedArray(res.buffer), canvas.width, canvas.height)
+        temp = resImageData
+        ctx.putImageData(resImageData, 0, 0)
+        requestAnimationFrame(start); // Call the function again for the next frame
+      })
+    }
+
+    if(mode.value === '4') {
+      if(temp) {
+        ctx.putImageData(temp, 0, 0)
+      }
+      sketchFilter4(data, canvas.width, canvas.height).then(res => {
         const resImageData = new ImageData(new Uint8ClampedArray(res.buffer), canvas.width, canvas.height)
         temp = resImageData
         ctx.putImageData(resImageData, 0, 0)
@@ -186,6 +198,10 @@ function sketchFilter2(
     <span>
       <input type="radio" id="radio_3" value="3" v-model="mode">
       <label for="radio_3">worker</label>
+    </span>
+    <span>
+      <input type="radio" id="radio_4" value="4" v-model="mode">
+      <label for="radio_4">wasm in worker</label>
     </span>
   </div>
 </template>
